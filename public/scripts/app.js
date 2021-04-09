@@ -8,85 +8,82 @@ var app = {
     details: 'App Details',
     options: []
 };
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.details && React.createElement(
-        'p',
-        null,
-        app.details
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options && app.options.length > 0 ? "Option here" : "No Option"
-    ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            'List item 1'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'List item 2'
-        )
-    )
-);
 
-var count = 0;
-var addOne = function addOne() {
-    count = count + 1;
-    renderCounterApp();
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+    var option = e.target.elements.option.value;
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        renderApp();
+    }
 };
-var minusOne = function minusOne() {
-    count = count - 1;
-    renderCounterApp();
-};
-var resetCount = function resetCount() {
-    count = 0;
-    renderCounterApp();
+
+var removeOptions = function removeOptions() {
+    console.log("Remove Button working");
+    app.options = [];
+    renderApp();
+    console.log("Option data removed");
 };
 
 var appRoot = document.getElementById('app');
 
-var renderCounterApp = function renderCounterApp() {
+var renderApp = function renderApp() {
 
-    var templateTwo = React.createElement(
+    var template = React.createElement(
         'div',
         null,
         React.createElement(
             'h1',
             null,
-            'Count : ',
-            count
+            app.title
+        ),
+        app.details && React.createElement(
+            'p',
+            null,
+            app.details
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options && app.options.length > 0 ? "Option here" : "No Option"
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length
         ),
         React.createElement(
             'button',
-            { onClick: addOne },
-            '+1'
+            { onClick: removeOptions },
+            'Remove All'
         ),
         React.createElement(
-            'button',
-            { onClick: minusOne },
-            '-1'
+            'ol',
+            null,
+            React.createElement(
+                'li',
+                null,
+                'List item 1'
+            ),
+            React.createElement(
+                'li',
+                null,
+                'List item 2'
+            )
         ),
         React.createElement(
-            'button',
-            { onClick: resetCount },
-            'Reset Count'
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                null,
+                'Add Option'
+            )
         )
     );
 
-    ReactDOM.render(templateTwo, appRoot);
+    ReactDOM.render(template, appRoot);
 };
-
-renderCounterApp();
+renderApp();
