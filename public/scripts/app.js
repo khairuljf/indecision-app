@@ -3,10 +3,10 @@
 console.log('App.js is running now!');
 
 // JSX - JavaScript XML
-
 var app = {
-    title: 'Indecisoin App',
-    details: 'Chapainaabgonj'
+    title: 'Indecisoin App!',
+    details: 'App Details',
+    options: []
 };
 var template = React.createElement(
     'div',
@@ -16,10 +16,15 @@ var template = React.createElement(
         null,
         app.title
     ),
-    React.createElement(
+    app.details && React.createElement(
         'p',
         null,
         app.details
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.options && app.options.length > 0 ? "Option here" : "No Option"
     ),
     React.createElement(
         'ol',
@@ -54,7 +59,7 @@ function userLocation(location) {
     }
 }
 
-var templateTwp = React.createElement(
+var templateTwo = React.createElement(
     'div',
     null,
     React.createElement(
@@ -63,7 +68,7 @@ var templateTwp = React.createElement(
         'Name : ',
         user.name ? user.name : 'Anonomous'
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         'p',
         null,
         'Age : ',
@@ -73,4 +78,4 @@ var templateTwp = React.createElement(
 );
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwp, appRoot);
+ReactDOM.render(template, appRoot);
