@@ -1,10 +1,15 @@
 console.log('App.js is running now!');
 
 // JSX - JavaScript XML
+
+var app ={
+    title:'Indecisoin App',
+    details:'Chapainaabgonj'
+}
 var template = (
     <div>
-        <h1>Hello Khairul</h1>
-        <p>App Description will be here</p>
+        <h1>{app.title}</h1>
+        <p>{app.details}</p>
         <ol>
             <li>List item 1</li>
             <li>List item 2</li>
@@ -18,11 +23,18 @@ var user ={
     location:'Chapainaabgonj'
 }
 
+function userLocation(location){
+    if(location){
+        return <p>Location : {location}</p>;
+    }
+}
+
+
 var templateTwp = (
     <div>
-        <h1>Name : {user.name}</h1>
+        <h1>Name : {user.name ? user.name : 'Anonomous'}</h1>
         <p>Age : {user.age}</p>
-        <p>Location : {user.location}</p>
+        {userLocation(user.location)}
     </div>
 );
 var appRoot = document.getElementById('app');
