@@ -19,19 +19,12 @@ const onFormSubmit = (e)=>{
 }
 
 const removeOptions = ()=>{
-    console.log("Remove Button working");
     app.options=[];
     renderApp()
-    console.log("Option data removed");
 }
     
 
-
-
-
 const appRoot = document.getElementById('app');
-
-
 
 const renderApp = ()=>{
 
@@ -43,8 +36,9 @@ const renderApp = ()=>{
             <p>{app.options.length}</p>
             <button onClick={removeOptions}>Remove All</button>
             <ol>
-                <li>List item 1</li>
-                <li>List item 2</li>
+               {
+                   app.options.map((option)=> <li key={option} id={option}>{option}</li> )
+               }
             </ol>
     
             <form onSubmit={onFormSubmit}>
@@ -55,6 +49,6 @@ const renderApp = ()=>{
     );
 
     ReactDOM.render(template, appRoot);
-
 }
+
 renderApp()

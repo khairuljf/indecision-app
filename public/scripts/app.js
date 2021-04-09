@@ -20,10 +20,8 @@ var onFormSubmit = function onFormSubmit(e) {
 };
 
 var removeOptions = function removeOptions() {
-    console.log("Remove Button working");
     app.options = [];
     renderApp();
-    console.log("Option data removed");
 };
 
 var appRoot = document.getElementById('app');
@@ -61,16 +59,13 @@ var renderApp = function renderApp() {
         React.createElement(
             'ol',
             null,
-            React.createElement(
-                'li',
-                null,
-                'List item 1'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'List item 2'
-            )
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option, id: option },
+                    option
+                );
+            })
         ),
         React.createElement(
             'form',
@@ -86,4 +81,5 @@ var renderApp = function renderApp() {
 
     ReactDOM.render(template, appRoot);
 };
+
 renderApp();
