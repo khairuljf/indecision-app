@@ -1,11 +1,22 @@
 
+const obj ={
+    name : 'khairul',
+    getName(){
+        return this.name
+    }
+}
+
+const getName = obj.getName.bind({});
+console.log(getName())
+
+
 class IndecisionApp extends React.Component{
  render(){
-
+     
     const title = "Indecesion App";
     const subtitle = "App description from variable";
     const options = ['One', 'two', 'three'];
-
+    
      return(
         <div>
             <Header title={title} subtitle={subtitle} />
@@ -19,7 +30,6 @@ class IndecisionApp extends React.Component{
 
 class Header extends React.Component{
     render(){
-        console.log(this.props)
         return (
             <div>
                 <h1>{this.props.title}</h1>
@@ -30,23 +40,32 @@ class Header extends React.Component{
 }
 
 class Action extends React.Component{
+    
+    handlePick(){
+        alert('handlePick')
+    }
+  
+
+
     render(){
         return (
             <div>
-                <button>What should I do</button>
-                <button>Remove All</button>
+                <button onClick={this.handlePick}>What should I do</button>
+                
             </div>
         )
     }
 }
 
 class Options extends React.Component{
-    render(){
 
+    handleAllRemove(){
         console.log(this.props.options)
-
+    }
+    render(){
         return (
            <div>
+               <button onClick={this.handleAllRemove.bind(this)}>Remove All</button>
               {(this.props.options && this.props.options.length>0) ? <p>{this.props.options.length} Option Here</p>: <p>No Option</p>}
                {
                    this.props.options.map((option)=><Option key={option} optionText={option} />)
@@ -68,9 +87,19 @@ class Option extends React.Component{
 }
 
 class AddOption extends React.Component{
+
+    submitForm(e){
+        e.preventDefault();
+        const option = e.target.elements.option.value.trim();
+        if(option){
+            alert(option)
+        }
+    }
+
+
     render(){
         return (
-            <form>
+            <form onSubmit={this.submitForm}>
                 <input type="text" name="option" />
                 <button>Submit</button>
             </form>
