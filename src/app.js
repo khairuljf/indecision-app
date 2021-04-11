@@ -1,15 +1,4 @@
 
-const obj ={
-    name : 'khairul',
-    getName(){
-        return this.name
-    }
-}
-
-const getName = obj.getName.bind({});
-console.log(getName())
-
-
 class IndecisionApp extends React.Component{
  render(){
      
