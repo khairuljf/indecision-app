@@ -116,10 +116,13 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
 
-    function Options() {
+    function Options(props) {
         _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+        _this4.handleAllRemove = _this4.handleAllRemove.bind(_this4);
+        return _this4;
     }
 
     _createClass(Options, [{
@@ -135,18 +138,8 @@ var Options = function (_React$Component4) {
                 null,
                 React.createElement(
                     "button",
-                    { onClick: this.handleAllRemove.bind(this) },
+                    { onClick: this.handleAllRemove },
                     "Remove All"
-                ),
-                this.props.options && this.props.options.length > 0 ? React.createElement(
-                    "p",
-                    null,
-                    this.props.options.length,
-                    " Option Here"
-                ) : React.createElement(
-                    "p",
-                    null,
-                    "No Option"
                 ),
                 this.props.options.map(function (option) {
                     return React.createElement(Option, { key: option, optionText: option });

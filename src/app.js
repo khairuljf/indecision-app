@@ -59,14 +59,19 @@ class Action extends React.Component{
 
 class Options extends React.Component{
 
+    constructor (props){
+        super(props)
+        this.handleAllRemove = this.handleAllRemove.bind(this);
+    }
+
     handleAllRemove(){
         console.log(this.props.options)
     }
+
     render(){
         return (
            <div>
-               <button onClick={this.handleAllRemove.bind(this)}>Remove All</button>
-              {(this.props.options && this.props.options.length>0) ? <p>{this.props.options.length} Option Here</p>: <p>No Option</p>}
+               <button onClick={this.handleAllRemove}>Remove All</button>
                {
                    this.props.options.map((option)=><Option key={option} optionText={option} />)
                }
