@@ -7,7 +7,7 @@ class IndecisionApp extends React.Component{
         this.handleAddOption = this.handleAddOption.bind(this)
         this.handleAction = this.handleAction.bind(this)
         this.state ={
-            options:['One', 'two', 'three']
+            options:[]
         }
     }
 
@@ -27,13 +27,19 @@ class IndecisionApp extends React.Component{
     }
 
     handleAddOption(option){
-    
-       console.log(option)
+
+        if(!option){
+            return 'Enter Valid Value item';
+        }else if(this.state.options.indexOf(option)>-1){
+            return 'This option alreay exits';
+        }
+
         this.setState((prevSate)=>{
             return{
-                
+                options:prevSate.options.concat([option])
             }
         })
+
     }
 
 
@@ -63,9 +69,6 @@ class Header extends React.Component{
 }
 
 class Action extends React.Component{
-    
-  
-  
     render(){
         return (
             <div>
@@ -79,8 +82,6 @@ class Action extends React.Component{
 }
 
 class Options extends React.Component{
-
-
 
     render(){
         return (
@@ -110,24 +111,37 @@ class AddOption extends React.Component{
     constructor(props){
         super(props);
         this.formSubmit= this.formSubmit.bind(this);
+        this.state ={
+            error:undefined
+        }
     }
 
 
     formSubmit(e){
         e.preventDefault();
         const option = e.target.elements.option.value.trim();
-        if(option){
-            this.props.handleAddOption(option)
-        }
+       const error =  this.props.handleAddOption(option)
+       
+
+       this.setState(()=>{
+           return{
+               error
+            //error:error -- Same thing above
+           }
+       })
+
     }
 
 
     render(){
         return (
+          <div>
+              {this.state.error && <p>{this.state.error}</p>}
             <form onSubmit={this.formSubmit}>
                 <input type="text" name="option" />
                 <button>Submit</button>
             </form>
+          </div>
         )
     }
 }

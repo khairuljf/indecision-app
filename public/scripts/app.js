@@ -20,7 +20,7 @@ var IndecisionApp = function (_React$Component) {
         _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.handleAction = _this.handleAction.bind(_this);
         _this.state = {
-            options: ['One', 'two', 'three']
+            options: []
         };
         return _this;
     }
@@ -46,9 +46,16 @@ var IndecisionApp = function (_React$Component) {
         key: 'handleAddOption',
         value: function handleAddOption(option) {
 
-            console.log(option);
+            if (!option) {
+                return 'Enter Valid Value item';
+            } else if (this.state.options.indexOf(option) > -1) {
+                return 'This option alreay exits';
+            }
+
             this.setState(function (prevSate) {
-                return {};
+                return {
+                    options: prevSate.options.concat([option])
+                };
             });
         }
     }, {
@@ -191,6 +198,9 @@ var AddOption = function (_React$Component6) {
         var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
 
         _this6.formSubmit = _this6.formSubmit.bind(_this6);
+        _this6.state = {
+            error: undefined
+        };
         return _this6;
     }
 
@@ -199,21 +209,35 @@ var AddOption = function (_React$Component6) {
         value: function formSubmit(e) {
             e.preventDefault();
             var option = e.target.elements.option.value.trim();
-            if (option) {
-                this.props.handleAddOption(option);
-            }
+            var error = this.props.handleAddOption(option);
+
+            this.setState(function () {
+                return {
+                    error: error
+                    //error:error -- Same thing above
+                };
+            });
         }
     }, {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'form',
-                { onSubmit: this.formSubmit },
-                React.createElement('input', { type: 'text', name: 'option' }),
-                React.createElement(
-                    'button',
+                'div',
+                null,
+                this.state.error && React.createElement(
+                    'p',
                     null,
-                    'Submit'
+                    this.state.error
+                ),
+                React.createElement(
+                    'form',
+                    { onSubmit: this.formSubmit },
+                    React.createElement('input', { type: 'text', name: 'option' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Submit'
+                    )
                 )
             );
         }
