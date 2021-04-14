@@ -5,7 +5,8 @@
   "author": "Andrew Mead",
   "license": "MIT",
   "scripts":{
-    "serve":"live-server public/"
+    "serve":"live-server public/",
+    "build": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
