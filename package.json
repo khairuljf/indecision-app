@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Andrew Mead",
   "license": "MIT",
+  "scripts":{
+    "serve":"live-server public/"
+  },
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "1.5.2",
