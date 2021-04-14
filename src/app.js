@@ -7,17 +7,12 @@ class IndecisionApp extends React.Component{
         this.handleAddOption = this.handleAddOption.bind(this)
         this.handleAction = this.handleAction.bind(this)
         this.state ={
-            options:[]
+            options:this.props.options
         }
     }
 
-    handleDeleteOptions(){
-      
-        this.setState(()=>{
-            return{
-                options:[]
-            }
-        })
+    handleDeleteOptions(){ 
+        this.setState( ()=>({options:[]}) )
     }
 
     handleAction(){
@@ -34,11 +29,7 @@ class IndecisionApp extends React.Component{
             return 'This option alreay exits';
         }
 
-        this.setState((prevSate)=>{
-            return{
-                options:prevSate.options.concat([option])
-            }
-        })
+        this.setState((prevSate)=>({options:prevSate.options.concat([option])}))
 
     }
 
@@ -48,13 +39,17 @@ class IndecisionApp extends React.Component{
     const subtitle = "App description from variable";
      return(
         <div>
-            <Header title={title} subtitle={subtitle} />
+            <Header  subtitle={subtitle} />
             <Action hasOptions={this.state.options.length>0}  handleAction={this.handleAction}/>
             <Options options={this.state.options}  handleDeleteOptions={this.handleDeleteOptions}/>
             <AddOption handleAddOption={this.handleAddOption} />
         </div>
      )
  }
+}
+
+IndecisionApp.defaultProps ={
+    options:[]
 }
 
 
@@ -65,6 +60,10 @@ const Header = (props) =>{
             <p>{props.subtitle}</p>
         </div>
     )
+}
+
+Header.defaultProps ={
+    title: 'Hello',
 }
 
 const Action = (props) =>{
@@ -117,15 +116,7 @@ class AddOption extends React.Component{
         e.preventDefault();
         const option = e.target.elements.option.value.trim();
        const error =  this.props.handleAddOption(option)
-       
-
-       this.setState(()=>{
-           return{
-               error
-            //error:error -- Same thing above
-           }
-       })
-
+       this.setState( ()=>({error}) )
     }
 
 
@@ -145,4 +136,4 @@ class AddOption extends React.Component{
 
 
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+ReactDOM.render(<IndecisionApp options={['Hlello', 'World']} />, document.getElementById('app'))

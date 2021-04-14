@@ -20,7 +20,7 @@ var IndecisionApp = function (_React$Component) {
         _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.handleAction = _this.handleAction.bind(_this);
         _this.state = {
-            options: []
+            options: _this.props.options
         };
         return _this;
     }
@@ -28,11 +28,8 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'handleDeleteOptions',
         value: function handleDeleteOptions() {
-
             this.setState(function () {
-                return {
-                    options: []
-                };
+                return { options: [] };
             });
         }
     }, {
@@ -53,9 +50,7 @@ var IndecisionApp = function (_React$Component) {
             }
 
             this.setState(function (prevSate) {
-                return {
-                    options: prevSate.options.concat([option])
-                };
+                return { options: prevSate.options.concat([option]) };
             });
         }
     }, {
@@ -66,7 +61,7 @@ var IndecisionApp = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, { title: title, subtitle: subtitle }),
+                React.createElement(Header, { subtitle: subtitle }),
                 React.createElement(Action, { hasOptions: this.state.options.length > 0, handleAction: this.handleAction }),
                 React.createElement(Options, { options: this.state.options, handleDeleteOptions: this.handleDeleteOptions }),
                 React.createElement(AddOption, { handleAddOption: this.handleAddOption })
@@ -76,6 +71,10 @@ var IndecisionApp = function (_React$Component) {
 
     return IndecisionApp;
 }(React.Component);
+
+IndecisionApp.defaultProps = {
+    options: []
+};
 
 var Header = function Header(props) {
     return React.createElement(
@@ -92,6 +91,10 @@ var Header = function Header(props) {
             props.subtitle
         )
     );
+};
+
+Header.defaultProps = {
+    title: 'Hello'
 };
 
 var Action = function Action(props) {
@@ -150,12 +153,8 @@ var AddOption = function (_React$Component2) {
             e.preventDefault();
             var option = e.target.elements.option.value.trim();
             var error = this.props.handleAddOption(option);
-
             this.setState(function () {
-                return {
-                    error: error
-                    //error:error -- Same thing above
-                };
+                return { error: error };
             });
         }
     }, {
@@ -186,4 +185,4 @@ var AddOption = function (_React$Component2) {
     return AddOption;
 }(React.Component);
 
-ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(IndecisionApp, { options: ['Hlello', 'World'] }), document.getElementById('app'));
