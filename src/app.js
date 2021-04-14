@@ -8,7 +8,7 @@ class IndecisionApp extends React.Component{
         this.handleAddOption = this.handleAddOption.bind(this)
         this.handleAction = this.handleAction.bind(this)
         this.state ={
-            options:this.props.options
+            options:[]
         }
     }
 
@@ -25,9 +25,7 @@ class IndecisionApp extends React.Component{
         }catch(e){
             // Do Nothing at all
         }
-
-        
-        
+  
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -89,9 +87,6 @@ class IndecisionApp extends React.Component{
 
 }
 
-IndecisionApp.defaultProps ={
-    options:[]
-}
 
 
 const Header = (props) =>{
