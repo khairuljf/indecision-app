@@ -28,7 +28,6 @@ var Counter = function (_React$Component) {
   _createClass(Counter, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-
       var stringCount = localStorage.getItem('count');
       var count = parseInt(stringCount, 10);
 
@@ -41,8 +40,6 @@ var Counter = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
-      console.log("reset");
-
       if (prevState.count !== this.state.count) {
         localStorage.setItem('count', this.state.count);
       }
