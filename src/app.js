@@ -4,6 +4,7 @@ class IndecisionApp extends React.Component{
     constructor(props){
         super(props)
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
+        this.handleDeleteOption = this.handleDeleteOption.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this)
         this.handleAction = this.handleAction.bind(this)
         this.state ={
@@ -14,6 +15,14 @@ class IndecisionApp extends React.Component{
     handleDeleteOptions(){ 
         this.setState( ()=>({options:[]}) )
     }
+
+    handleDeleteOption(optionToRemove){
+        this.setState((prevState)=>({
+            options:prevState.options.filter((option)=> optionToRemove !== option )
+        }))
+    }
+
+    
 
     handleAction(){
         const RandomNumber = Math.floor(Math.random() * this.state.options.length);
@@ -28,9 +37,7 @@ class IndecisionApp extends React.Component{
         }else if(this.state.options.indexOf(option)>-1){
             return 'This option alreay exits';
         }
-
         this.setState((prevSate)=>({options:prevSate.options.concat([option])}))
-
     }
 
 
@@ -41,7 +48,11 @@ class IndecisionApp extends React.Component{
         <div>
             <Header  subtitle={subtitle} />
             <Action hasOptions={this.state.options.length>0}  handleAction={this.handleAction}/>
-            <Options options={this.state.options}  handleDeleteOptions={this.handleDeleteOptions}/>
+            <Options 
+                options={this.state.options}  
+                handleDeleteOptions={this.handleDeleteOptions} 
+                deleteItem={this.handleDeleteOption}/>
+
             <AddOption handleAddOption={this.handleAddOption} />
         </div>
      )
@@ -72,7 +83,6 @@ const Action = (props) =>{
             <button onClick={props.handleAction} disabled={!props.hasOptions}>
                 What should I do
                 </button>
-            
         </div>
     )
 }
@@ -84,25 +94,31 @@ const Options = (props) =>{
         <div>
                <button onClick={props.handleDeleteOptions}>Remove All</button>
                {
-                   props.options.map((option)=><Option key={option} optionText={option} />)
+                   props.options.map((option)=>(
+                    <Option 
+                    key={option}
+                    optionText={option}
+                    deleteThis={props.deleteItem} />
+                   ))
                }
                
            </div>
     )
 }
 
-
 const Option= (props) =>{
     return(
         <div>
             {props.optionText}
+            <button onClick={(e)=>{
+                props.deleteThis(props.optionText)
+            }} >Remove</button>
         </div>
     )
 }
 
 
 class AddOption extends React.Component{
-
     constructor(props){
         super(props);
         this.formSubmit= this.formSubmit.bind(this);
@@ -110,7 +126,6 @@ class AddOption extends React.Component{
             error:undefined
         }
     }
-
 
     formSubmit(e){
         e.preventDefault();
@@ -132,8 +147,6 @@ class AddOption extends React.Component{
         )
     }
 }
-
-
 
 
 ReactDOM.render(<IndecisionApp options={['Hlello', 'World']} />, document.getElementById('app'))
