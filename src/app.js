@@ -1,8 +1,12 @@
 
-import './utils.js'
+// import './utils.js'
 
-import {isAdult, canDrink} from './person.js';
+// import {isAdult, canDrink} from './person.js';
 
-console.log(isAdult(25)) 
+// console.log(isAdult(25)) 
 
-console.log(canDrink(17)) 
+// console.log(canDrink(25)) 
+
+import validator from  'validator';
+
+console.log(validator.isEmail('khairul@gmail.com')) 
