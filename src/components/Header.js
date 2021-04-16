@@ -10,7 +10,7 @@ const Header = (props) =>{
 }
 
 Header.defaultProps ={
-    title: 'Indecesion App!',
+    title: 'Indecesion App!!',
 }
 
 export default Header;
