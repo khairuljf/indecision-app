@@ -1,12 +1,8 @@
 
-// import './utils.js'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// import {isAdult, canDrink} from './person.js';
+const template =<p>Hello world</p>
 
-// console.log(isAdult(25)) 
 
-// console.log(canDrink(25)) 
-
-import validator from  'validator';
-
-console.log(validator.isEmail('khairul@gmail.com')) 
+ReactDOM.render(template, document.getElementById('app'))
