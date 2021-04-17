@@ -8,16 +8,14 @@ import React from 'react';
 
 //export default  (props) =>{
 
-const Option= (props) =>{
-    return(
-        <div>
-            {props.optionText}
-            <button onClick={(e)=>{
-                props.deleteThis(props.optionText)
-            }} >Remove</button>
-        </div>
-    )
-}
+const Option= (props) =>(
+    <div>
+        {props.optionText}
+        <button onClick={(e)=>{
+            props.deleteThis(props.optionText)
+        }} >Remove</button>
+    </div>
+)
 
 export default Option; // Export for show in debuging mood in React Extension
 
