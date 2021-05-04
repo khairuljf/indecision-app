@@ -10,7 +10,7 @@ const Options = (props) => (
         onClick={props.handleDeleteOptions}
       >
         Remove All
-    </button>
+      </button>
     </div>
 
     {props.options.length === 0 && <p className="widget__message">Please add an option to get started!</p>}
