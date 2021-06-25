@@ -2,7 +2,7 @@
   "name": "indecision-app",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Andrew Mead",
+  "author": "Khairul Islam",
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
